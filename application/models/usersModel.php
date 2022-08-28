@@ -9,7 +9,23 @@ class UsersModel extends CI_Model {
 
     public function setUsers(array $datos){
 
-        return $this->db->insert('users',$datos); 
+        if($this->db->insert('users',$datos)){ 
+
+        $json = array(
+            "error" => false,
+            "detalle" => "Registro de Usuario con exito"
+       );
+
+    }else{
+
+        $json = array(
+            "error" => true,
+            "detalle" => "Error a registrar el usuario"
+        );
+
+    }
+
+       return json_encode($json, true);
 
     }
 
